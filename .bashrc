@@ -6,9 +6,48 @@ depends () {
     fi
 }
 
+quantify () {
+    fileQuantity=-2
+
+    for file in `ls -a`; do
+        fileQuantity=$((fileQuantity + 1))
+    done
+    if [ "$fileQuantity" -lt 9 ]; then
+        echo -n "0"
+    fi
+    echo "$fileQuantity"
+}
+
+yay () {
+    x__=$1
+    y__=$2
+    char__=$3
+
+    text__=""
+
+    iter__=$((x__ * y__))
+
+    for ((i = 0; ++i <= iter__;)); do
+        if [ "$((i % x__))" -eq 0 ]; then
+            text__="$text__$char__\n"
+        else
+            text__="$text__$char__"
+        fi
+    done
+
+    echo -e "$text__" | lolcat
+}
+
 reset=$(echo -en "\e[00m")
 bold=$(echo -en "\e[1m")
 dim=$(echo -en "\e[2m")
+underlined=$(echo -en "\e[4m")
+
+lShade="░"
+nShade="▒"
+dShade="█"
+shadeDash="░▒█"
+dashShade="█▒░"
 
 hard=$(echo -ne "\e[38;2;29;32;33m")
 medium=$(echo -ne "\e[38;2;40;40;40m")
@@ -35,8 +74,8 @@ source $HOME/.git-prompt.sh
 UserName='Lord'
 HostName='null'
 
-PS1='${reset}[$(depends "${lime}✓" "${wine}✗")${reset}] ⟨${blue}$UserName${reset}${dim}@${reset}${pink}$HostName${reset}⟩ [ ${gold}\w$(__git_ps1 "${reset}:${cyan}%s")${reset} ]${reset} '
-PS2='${reset}[${gold}@${reset}] ⟨${blue}$UserName${reset}${dim}@${reset}${pink}$HostName${reset}⟩ | ${gold}\w$(__git_ps1 "${reset}:${cyan}%s")${reset} |${reset} '
+PS1='\n${reset}[$(depends "${lime}✓" "${wine}✗")${reset}] ⟨${blue}$UserName${reset}${dim}@${reset}${pink}$HostName${reset}⟩ (${cyan}${underlined}$(quantify)${reset}) [${gold}\w$(__git_ps1 "${reset}:${cyan}%s")${reset}]\n${medium}$shadeDash${reset} '
+PS2='${medium}$shadeDash${reset} '
 
 alias c='clear'
 alias src='c; source ~/.bashrc'
