@@ -10,7 +10,7 @@ quantify () {
     fileQuantity=-2
 
     for file in `ls -a`; do
-        fileQuantity=$((fileQuantity + 1))
+        ((++fileQuantity))
     done
     if [ "$fileQuantity" -lt 9 ]; then
         echo -n "0"
@@ -74,8 +74,8 @@ source $HOME/.git-prompt.sh
 UserName='Lord'
 HostName='null'
 
-PS1='\n${reset}[$(depends "${lime}✓" "${wine}✗")${reset}] ⟨${blue}$UserName${reset}${dim}@${reset}${pink}$HostName${reset}⟩ (${cyan}${underlined}$(quantify)${reset}) [${gold}\w$(__git_ps1 "${reset}:${cyan}%s")${reset}]\n${medium}$shadeDash${reset} '
-PS2='${medium}$shadeDash${reset} '
+PS1='\n\[${reset}\][$(depends "\[${lime}\]✓" "\[${wine}\]✗")\[${reset}\]] ⟨\[${blue}\]$UserName\[${reset}\]\[${dim}\]\[${dPink}\]@\[${reset}\]\[${pink}\]$HostName\[${reset}\]⟩ (\[${cyan}\]\[${underlined}\]$(quantify)\[${reset}\]) [ \[${gold}\]\w$(__git_ps1 "\[${reset}\]:\[${cyan}\]%s")\[${reset}\] ] \[${dBlue}\]λ\[${reset}\] '
+PS2='[\[${gold}\]@\[${reset}\]] ⟨\[${blue}\]$UserName\[${reset}\]\[${dim}\]\[${dPink}\]#\[${reset}\]\[${pink}\]$HostName\[${reset}\]⟩ (\[${cyan}\]\[${underlined}\]$(quantify)\[${reset}\]) | \[${gold}\]\w$(__git_ps1 "\[${reset}\]:\[${cyan}\]%s")\[${reset}\] | \[${dBlue}\]|\[${reset}\] '
 
 alias c='clear'
 alias src='c; source ~/.bashrc'
