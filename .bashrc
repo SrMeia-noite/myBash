@@ -22,13 +22,21 @@ function quantify
 
 function repeatBy 
 {  
-    template=$1
-    colorBy=$2
-    quantity=${#3}
-    char=$4
+    templateColor=$1
+    templateChar=$2
+    templateLength=$3
 
-    if [ "$quantity" != "0" ]; then echo -ne "$template"; fi
-    
+    colorBy=$4
+    quantity=${#5}
+    char=$6
+
+    if [ "$quantity" != "0" ]; then
+        echo -ne "$templateColor"
+        for ((i = 0; ++i <= templateLength;)); do
+            echo -ne "$templateChar"
+        done
+    fi
+
     echo -ne "$colorBy"
     for ((i = 0; ++i <= quantity;)); do
         echo -ne "$char"
@@ -74,6 +82,14 @@ source $HOME/.git-prompt.sh
 UserName='Lord'
 HostName='null'
 
+RepeatCharOfUser='·'
+RepeatCharOfHost='·'
+RepeatCharOfPath='·'
+RepeatCharOfNull='·'
+RepeatCharOfFiles='·'
+RepeatCharOfBranch='·'
+
 PS1='\[${blue}\]$UserName \[${dGrey}\]at \[${pink}\]$HostName \[${dGrey}\]in \[${gold}\]\w \[${dGrey}\]with \[${orange}\]$(quantify) $(__git_ps1 "\[${dGrey}\]on \[${cyan}\]%s ")\[${reset}\]'
-PS2='$(repeatBy "" "\[${dBlue}\]" "$UserName" ":")$(repeatBy "\[${dGrey}\]::::" "\[${dPink}\]" "$HostName" ":")$(repeatBy "\[${dGrey}\]::::" "\[${dGold}\]" "\w" ":")$(repeatBy "\[${dGrey}\]::::::" "\[${dOrange}\]" "$(quantify)" ":")$(repeatBy "\[${dGrey}\]::::" "\[${dCyan}\]" "$(__git_ps1 "%s")" ":")\[${reset}\] '
+PS2='$(repeatBy "" "" 0 "\[${dBlue}\]" "$UserName" "$RepeatCharOfUser")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 4 "\[${dPink}\]" "$HostName" "$RepeatCharOfHost")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 4 "\[${dGold}\]" "\w" "$RepeatCharOfPath")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 6 "\[${dOrange}\]" "$(quantify)" "$RepeatCharOfFiles")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 4 "\[${dCyan}\]" "$(__git_ps1 "%s")" "$RepeatCharOfBranch")\[${reset}\] '
+
 alias src='clear; source ~/.bashrc'
