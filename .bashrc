@@ -82,14 +82,22 @@ source $HOME/.git-prompt.sh
 UserName='Lord'
 HostName='null'
 
+# Verbose
 RepeatCharOfUser='·'
 RepeatCharOfHost='·'
 RepeatCharOfPath='·'
 RepeatCharOfNull='·'
 RepeatCharOfFiles='·'
 RepeatCharOfBranch='·'
+RepeatCharOfExitCode='·'
 
-PS1='\[${blue}\]$UserName \[${dGrey}\]at \[${pink}\]$HostName \[${dGrey}\]in \[${gold}\]\w \[${dGrey}\]with \[${orange}\]$(quantify) $(__git_ps1 "\[${dGrey}\]on \[${cyan}\]%s ")\[${reset}\]'
-PS2='$(repeatBy "" "" 0 "\[${dBlue}\]" "$UserName" "$RepeatCharOfUser")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 4 "\[${dPink}\]" "$HostName" "$RepeatCharOfHost")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 4 "\[${dGold}\]" "\w" "$RepeatCharOfPath")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 6 "\[${dOrange}\]" "$(quantify)" "$RepeatCharOfFiles")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 4 "\[${dCyan}\]" "$(__git_ps1 "%s")" "$RepeatCharOfBranch")\[${reset}\] '
+PS1='\[${blue}\]$UserName \[${dGrey}\]did $(depends "\[${lime}\]✓" "\[${wine}\]✗") \[${dGrey}\]at \[${pink}\]$HostName \[${dGrey}\]in \[${gold}\]\w \[${dGrey}\]with \[${orange}\]$(quantify) $(__git_ps1 "\[${dGrey}\]on \[${cyan}\]%s ")\[${reset}\]'
+PS2='$(repeatBy "" "" 0 "\[${dBlue}\]" "$UserName" "$RepeatCharOfUser")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 5 "$(depends "\[${lime}\]" "\[${wine}\]")" "1" "$RepeatCharOfExitCode")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 4 "\[${dPink}\]" "$HostName" "$RepeatCharOfHost")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 4 "\[${dGold}\]" "\w" "$RepeatCharOfPath")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 6 "\[${dOrange}\]" "$(quantify)" "$RepeatCharOfFiles")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 4 "\[${dCyan}\]" "$(__git_ps1 "%s")" "$RepeatCharOfBranch")\[${reset}\] '
+
+# Slim #
+# SlimPS2Char=">=>"
+# 
+# PS1='\[${reset}\]┌──($(depends "\[${lime}\]✓" "\[${wine}\]✗"))─(\[${blue}\]$UserName\[${dGrey}\]@\[${pink}\]$HostName\[${reset}\])─(\[${orange}\]$(quantify)\[${reset}\])─(\[${gold}\]\w\[${reset}\])$(__git_ps1 "─(\[${cyan}\]%s\[${reset}\])")\n└─λ '
+# PS2='\[${dGold}\]$SlimPS2Char\[${reset}\] '
 
 alias src='clear; source ~/.bashrc'
