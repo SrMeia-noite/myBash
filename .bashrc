@@ -94,10 +94,7 @@ RepeatCharOfExitCode='·'
 PS1='\[${blue}\]$UserName \[${dGrey}\]did $(depends "\[${lime}\]✓" "\[${wine}\]✗") \[${dGrey}\]at \[${pink}\]$HostName \[${dGrey}\]in \[${gold}\]\w \[${dGrey}\]with \[${orange}\]$(quantify) $(__git_ps1 "\[${dGrey}\]on \[${cyan}\]%s ")\[${reset}\]'
 PS2='$(repeatBy "" "" 0 "\[${dBlue}\]" "$UserName" "$RepeatCharOfUser")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 5 "$(depends "\[${lime}\]" "\[${wine}\]")" "1" "$RepeatCharOfExitCode")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 4 "\[${dPink}\]" "$HostName" "$RepeatCharOfHost")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 4 "\[${dGold}\]" "\w" "$RepeatCharOfPath")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 6 "\[${dOrange}\]" "$(quantify)" "$RepeatCharOfFiles")$(repeatBy "\[${dGrey}\]" "$RepeatCharOfNull" 4 "\[${dCyan}\]" "$(__git_ps1 "%s")" "$RepeatCharOfBranch")\[${reset}\] '
 
-# Slim #
-# SlimPS2Char=">=>"
-# 
-# PS1='\[${reset}\]┌──($(depends "\[${lime}\]✓" "\[${wine}\]✗"))─(\[${blue}\]$UserName\[${dGrey}\]@\[${pink}\]$HostName\[${reset}\])─(\[${orange}\]$(quantify)\[${reset}\])─(\[${gold}\]\w\[${reset}\])$(__git_ps1 "─(\[${cyan}\]%s\[${reset}\])")\n└─λ '
-# PS2='\[${dGold}\]$SlimPS2Char\[${reset}\] '
+# PS1='$(depends "\[${dGrey}\][  \[${lime}\]OK  \[${dGrey}\]]" "\[${dGrey}\][ \[${wine}\]FAIL \[${dGrey}\]]") (\[${pink}\]$(quantify)\[${dGrey}\]) [\[${blue}\]\w$(__git_ps1 "\[${dGrey}\]::\[${cyan}\]%s")\[${dGrey}\]] (\[${orange}\]$HostName\[${dGrey}\]) \[${wine}\]$UserName\[${reset}\]λ '
+# PS2='\[${dGrey}\][ \[${gold}\]PRCD \[${dGrey}\]] (\[${pink}\]$(quantify)\[${dGrey}\]) [\[${blue}\]\w$(__git_ps1 "\[${dGrey}\]::\[${cyan}\]%s")\[${dGrey}\]] (\[${orange}\]$HostName\[${dGrey}\]) \[${wine}\]$UserName\[${reset}\]λ '
 
 alias src='clear; source ~/.bashrc'
